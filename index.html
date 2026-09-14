@@ -1,283 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+<title>THE DAILY</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #eeeae3;
+        color: #171717;
+        font-family: Georgia, "Times New Roman", serif;
+    }
+
+    /* COVER */
+
+    .cover {
+        height: 100vh;
+        min-height: 650px;
+        position: relative;
+        overflow: hidden;
+        background-image:
+            linear-gradient(
+                rgba(0,0,0,0.12),
+                rgba(0,0,0,0.22)
+            ),
+            url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=90");
+
+        background-size: cover;
+        background-position: center;
+        color: white;
+    }
+
+    .cover-top {
+        position: absolute;
+        top: 30px;
+        left: 40px;
+        right: 40px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .date {
+        opacity: 0.9;
+    }
+
+    .edition {
+        opacity: 0.9;
+    }
+
+    .masthead {
+        position: absolute;
+        top: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(70px, 12vw, 170px);
+        font-weight: normal;
+        letter-spacing: -7px;
+        line-height: 0.8;
+
+        white-space: nowrap;
+    }
+
+    .cover-content {
+        position: absolute;
+        left: 50px;
+        bottom: 50px;
+        right: 50px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 40px;
+    }
+
+    .main-headline {
+        max-width: 650px;
+    }
+
+    .main-headline .category {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .main-headline h1 {
+        font-size: clamp(42px, 6vw, 82px);
+        line-height: 0.94;
+        font-weight: normal;
+        letter-spacing: -2px;
+    }
+
+    .main-headline p {
+        margin-top: 18px;
+        font-size: 17px;
+        line-height: 1.4;
+        max-width: 500px;
+    }
+
+    .cover-headlines {
+        width: 290px;
+        font-family: Arial, sans-serif;
+    }
+
+    .cover-story {
+        border-top: 1px solid rgba(255,255,255,0.7);
+        padding: 14px 0;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .cover-story:hover {
+        opacity: 0.65;
+    }
+
+    .cover-story:last-child {
+        border-bottom: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .cover-story span {
+        display: block;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .cover-story strong {
+        font-family: Georgia, serif;
+        font-size: 19px;
+        font-weight: normal;
+        line-height: 1.1;
+    }
+
+    .enter {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.8;
+    }
+
+
+    /* MAGAZINE */
+
+    .magazine {
+        background: #eeeae3;
+        padding: 100px 6vw;
+    }
+
+    .intro {
+        max-width: 850px;
+        margin: 0 auto 100px;
+        text-align: center;
+    }
+
+    .intro .small-title {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+    }
+
+    .intro h2 {
+        font-size: clamp(36px, 5vw, 65px);
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: -1.5px;
+    }
+
+    .intro p {
+        margin: 30px auto 0;
+        max-width: 600px;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    /* SECTIONS */
+
+    .sections {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+        background: #171717;
+        border: 1px solid #171717;
+    }
+
+    .section {
+        background: #eeeae3;
+        min-height: 360px;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: background 0.25s;
+    }
+
+    .section:hover {
+        background: #e2ddd5;
+    }
+
+    .section-number {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .section h3 {
+        font-size: clamp(38px, 5vw, 65px);
+        font-weight: normal;
+        letter-spacing: -2px;
+    }
+
+    .section p {
+        max-width: 380px;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .section-link {
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 60px 6vw;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #171717;
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+        .cover-top {
+            left: 20px;
+            right: 20px;
         }
 
-        body {
-            background: #f7f4ee;
-            color: #171717;
-            font-family: Georgia, "Times New Roman", serif;
+        .masthead {
+            top: 75px;
+            font-size: 65px;
+            letter-spacing: -4px;
         }
 
-        header {
-            padding: 35px 5vw 25px;
-            border-bottom: 1px solid #cfcac0;
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
+        .cover-content {
+            left: 20px;
+            right: 20px;
+            bottom: 45px;
+            display: block;
         }
 
-        .logo {
-            font-family: Arial, sans-serif;
-            font-size: 42px;
-            letter-spacing: 7px;
-            font-weight: 600;
+        .main-headline h1 {
+            font-size: 48px;
         }
 
-        .date {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .main-headline p {
+            font-size: 15px;
         }
 
-        .intro {
-            padding: 65px 5vw 45px;
-        }
-
-        .intro p {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .intro h1 {
-            font-size: clamp(38px, 6vw, 76px);
-            font-weight: normal;
-            line-height: 0.95;
-            max-width: 850px;
-        }
-
-        .intro em {
-            font-style: italic;
+        .cover-headlines {
+            display: none;
         }
 
         .magazine {
-            width: 90%;
-            max-width: 1300px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            padding-bottom: 70px;
+            padding: 70px 20px;
         }
 
-        .card {
-            min-height: 310px;
-            padding: 30px;
-            border: 1px solid #cfcac0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f7f4ee;
+        .intro {
+            margin-bottom: 60px;
         }
 
-        .card:hover {
-            background: #171717;
-            color: #f7f4ee;
-            transform: translateY(-5px);
+        .sections {
+            grid-template-columns: 1fr;
         }
 
-        .number {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            letter-spacing: 2px;
-        }
-
-        .category {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .card h2 {
-            font-size: clamp(30px, 4vw, 52px);
-            font-weight: normal;
-            margin: 20px 0;
-        }
-
-        .description {
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 450px;
-        }
-
-        .full {
-            grid-column: span 2;
-            min-height: 240px;
+        .section {
+            min-height: 300px;
         }
 
         footer {
-            border-top: 1px solid #cfcac0;
-            padding: 25px 5vw;
-            display: flex;
-            justify-content: space-between;
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            padding: 40px 20px;
         }
-
-        @media (max-width: 700px) {
-            header {
-                align-items: start;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .logo {
-                font-size: 32px;
-            }
-
-            .magazine {
-                grid-template-columns: 1fr;
-            }
-
-            .full {
-                grid-column: span 1;
-            }
-
-            .card {
-                min-height: 250px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
+
 
 <body>
 
-<header>
-    <div class="logo">THE DAILY</div>
-    <div class="date">Monday · September 14 · 2026</div>
-</header>
+<!-- COVER -->
 
-<section class="intro">
-    <p>Your morning edit</p>
+<section class="cover">
 
-    <h1>
-        Good morning.<br>
-        <em>Here are seven things worth knowing today.</em>
-    </h1>
+    <div class="cover-top">
+        <div class="date">September 15, 2026</div>
+        <div class="edition">No. 01 — The Daily</div>
+    </div>
+
+    <div class="masthead">
+        THE DAILY
+    </div>
+
+    <div class="cover-content">
+
+        <div class="main-headline">
+            <div class="category">The World</div>
+
+            <h1>
+                The world is changing.<br>
+                Pay attention.
+            </h1>
+
+            <p>
+                The stories, ideas and discoveries worth knowing today.
+            </p>
+        </div>
+
+
+        <div class="cover-headlines">
+
+            <div class="cover-story">
+                <span>The Culture</span>
+                <strong>Why certain cities never really go out of style.</strong>
+            </div>
+
+            <div class="cover-story">
+                <span>The Woman</span>
+                <strong>The woman you should know this week.</strong>
+            </div>
+
+            <div class="cover-story">
+                <span>The Look</span>
+                <strong>What everyone is wearing — and why.</strong>
+            </div>
+
+            <div class="cover-story">
+                <span>The Unexpected</span>
+                <strong>A strange little fact you'll remember.</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="enter">
+        Scroll to enter the issue ↓
+    </div>
+
 </section>
+
+
+<!-- MAGAZINE -->
 
 <main class="magazine">
 
-    <article class="card">
-        <div class="number">01</div>
+    <section class="intro">
 
-        <div>
-            <div class="category">The World</div>
-            <h2>What matters today.</h2>
-            <div class="description">
-                One important story from the world,
-                explained without the noise.
-            </div>
+        <div class="small-title">
+            The idea
         </div>
-    </article>
+
+        <h2>
+            A daily dose of the world,
+            carefully chosen.
+        </h2>
+
+        <p>
+            THE DAILY is a small ritual for curious women.
+            Ten minutes to understand something, discover something,
+            notice something beautiful — and slowly build a world of
+            your own.
+        </p>
+
+    </section>
 
 
-    <article class="card">
-        <div class="number">02</div>
+    <section class="sections">
 
-        <div>
-            <div class="category">The Unexpected</div>
-            <h2>Did you know?</h2>
-            <div class="description">
-                Something wonderfully random
-                that might completely change the way you see the world.
+        <article class="section">
+            <div class="section-number">01</div>
+
+            <div>
+                <h3>THE WORLD</h3>
+                <p>
+                    One important story from the world,
+                    explained clearly enough to understand
+                    and deeply enough to remember.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
 
 
-    <article class="card">
-        <div class="number">03</div>
+        <article class="section">
+            <div class="section-number">02</div>
 
-        <div>
-            <div class="category">The Look</div>
-            <h2>Fashion, decoded.</h2>
-            <div class="description">
-                A trend, a photograph, a designer
-                or a cultural phenomenon worth understanding.
+            <div>
+                <h3>THE UNEXPECTED</h3>
+                <p>
+                    Science, history, nature, strange facts
+                    and ideas you didn't know you wanted to know.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
 
 
-    <article class="card">
-        <div class="number">04</div>
+        <article class="section">
+            <div class="section-number">03</div>
 
-        <div>
-            <div class="category">The Culture</div>
-            <h2>Something to discover.</h2>
-            <div class="description">
-                A film, a book, an artist, an exhibition
-                or an idea that deserves your attention.
+            <div>
+                <h3>THE LOOK</h3>
+                <p>
+                    Fashion, image and the visual language
+                    of the people and places shaping culture.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
 
 
-    <article class="card">
-        <div class="number">05</div>
+        <article class="section">
+            <div class="section-number">04</div>
 
-        <div>
-            <div class="category">The Woman</div>
-            <h2>Know her.</h2>
-            <div class="description">
-                One fascinating woman and the reason
-                you should know her name.
+            <div>
+                <h3>THE CULTURE</h3>
+                <p>
+                    Books, cinema, art, architecture, history
+                    and the things that make life richer.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
 
 
-    <article class="card">
-        <div class="number">06</div>
+        <article class="section">
+            <div class="section-number">05</div>
 
-        <div>
-            <div class="category">The Good Life</div>
-            <h2>The art of living.</h2>
-            <div class="description">
-                Food, travel, beauty, etiquette,
-                places and the little things that make life richer.
+            <div>
+                <h3>THE WOMAN</h3>
+                <p>
+                    One remarkable woman worth knowing —
+                    her story, her work and what she changed.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
 
 
-    <article class="card full">
-        <div class="number">07</div>
+        <article class="section">
+            <div class="section-number">06</div>
 
-        <div>
-            <div class="category">The Thought</div>
-            <h2>A question worth carrying with you.</h2>
-            <div class="description">
-                Not everything needs an answer.
-                Some things simply deserve to be thought about.
+            <div>
+                <h3>THE GOOD LIFE</h3>
+                <p>
+                    Places, food, beauty, travel, manners,
+                    objects and the art of living well.
+                </p>
+                <div class="section-link">Open section →</div>
             </div>
-        </div>
-    </article>
+        </article>
+
+
+        <article class="section">
+            <div class="section-number">07</div>
+
+            <div>
+                <h3>THE MIND</h3>
+                <p>
+                    Psychology, philosophy and small insights
+                    that change the way you understand yourself.
+                </p>
+                <div class="section-link">Open section →</div>
+            </div>
+        </article>
+
+
+        <article class="section">
+            <div class="section-number">08</div>
+
+            <div>
+                <h3>THE DAILY TIP</h3>
+                <p>
+                    One useful thing about nutrition, beauty,
+                    health or the body that you probably didn't know.
+                </p>
+                <div class="section-link">Open section →</div>
+            </div>
+        </article>
+
+    </section>
 
 </main>
 
+
 <footer>
-    <span>The Daily</span>
-    <span>Curiosity is a lifestyle.</span>
+    <div>THE DAILY</div>
+    <div>Read the world. Live beautifully.</div>
 </footer>
 
 </body>
