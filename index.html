@@ -4,333 +4,796 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>THE DAILY</title>
+<title>THE DAILY — September 15, 2026</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
 
-    body {
-        background: #eeeae3;
-        color: #171717;
-        font-family: Georgia, "Times New Roman", serif;
-    }
+/* =========================================================
+   THE DAILY — EDITION 01
+   ========================================================= */
 
-    /* COVER */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    .cover {
-        height: 100vh;
-        min-height: 650px;
-        position: relative;
-        overflow: hidden;
-        background-image:
-            linear-gradient(
-                rgba(0,0,0,0.12),
-                rgba(0,0,0,0.22)
-            ),
-            url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=90");
+html {
+    scroll-behavior: smooth;
+}
 
-        background-size: cover;
-        background-position: center;
-        color: white;
-    }
+body {
+    background: #f2efe9;
+    color: #171717;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+button {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+.page {
+    display: none;
+    min-height: 100vh;
+}
+
+.page.active {
+    display: block;
+}
+
+.eyebrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.serif-title {
+    font-weight: normal;
+}
+
+.small-line {
+    width: 100%;
+    height: 1px;
+    background: #171717;
+}
+
+.back-button {
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.back-button:hover {
+    opacity: .55;
+}
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+.cover {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.30)
+        ),
+        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=90");
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.cover-top {
+    position: absolute;
+    top: 27px;
+    left: 38px;
+    right: 38px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.masthead {
+    position: absolute;
+    top: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    font-size: clamp(65px, 11vw, 155px);
+    letter-spacing: -7px;
+    line-height: .8;
+    font-weight: normal;
+}
+
+.cover-content {
+    position: absolute;
+    left: 45px;
+    right: 45px;
+    bottom: 48px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 50px;
+}
+
+.cover-main {
+    max-width: 690px;
+}
+
+.cover-main h1 {
+    margin-top: 14px;
+
+    font-size: clamp(45px, 6vw, 82px);
+    line-height: .92;
+    letter-spacing: -3px;
+    font-weight: normal;
+}
+
+.cover-main p {
+    max-width: 500px;
+    margin-top: 20px;
+
+    font-size: 17px;
+    line-height: 1.45;
+}
+
+.cover-stories {
+    width: 310px;
+}
+
+.cover-story {
+    padding: 13px 0;
+    border-top: 1px solid rgba(255,255,255,.7);
+    cursor: pointer;
+    transition: opacity .2s;
+}
+
+.cover-story:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.7);
+}
+
+.cover-story:hover {
+    opacity: .55;
+}
+
+.cover-story .eyebrow {
+    margin-bottom: 5px;
+}
+
+.cover-story strong {
+    display: block;
+    font-size: 19px;
+    line-height: 1.1;
+    font-weight: normal;
+}
+
+.enter {
+    position: absolute;
+    bottom: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu {
+    position: fixed;
+    top: 18px;
+    right: 22px;
+    z-index: 100;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(23,23,23,.5);
+    background: rgba(242,239,233,.88);
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.menu-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+
+    background: #f2efe9;
+
+    display: none;
+    padding: 80px 8vw;
+}
+
+.menu-panel.open {
+    display: block;
+}
+
+.menu-panel h2 {
+    font-size: clamp(50px, 8vw, 110px);
+    font-weight: normal;
+    letter-spacing: -4px;
+    margin-bottom: 55px;
+}
+
+.menu-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid #171717;
+}
+
+.menu-link {
+    padding: 20px 0;
+    border-bottom: 1px solid #171717;
+    cursor: pointer;
+
+    font-size: 25px;
+}
+
+.menu-link:hover {
+    font-style: italic;
+}
+
+/* =========================================================
+   ISSUE INTRO
+   ========================================================= */
+
+.issue {
+    padding: 100px 6vw 120px;
+}
+
+.issue-header {
+    max-width: 850px;
+    margin: 0 auto 95px;
+    text-align: center;
+}
+
+.issue-header .eyebrow {
+    margin-bottom: 24px;
+}
+
+.issue-header h2 {
+    font-size: clamp(42px, 6vw, 75px);
+    line-height: .95;
+    letter-spacing: -3px;
+    font-weight: normal;
+}
+
+.issue-header p {
+    max-width: 600px;
+    margin: 30px auto 0;
+
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   SECTION GRID
+   ========================================================= */
+
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid #171717;
+    border-left: 1px solid #171717;
+}
+
+.section-card {
+    min-height: 400px;
+    padding: 32px;
+
+    border-right: 1px solid #171717;
+    border-bottom: 1px solid #171717;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    cursor: pointer;
+    transition: background .25s;
+}
+
+.section-card:hover {
+    background: #e5e0d8;
+}
+
+.section-card .number {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.section-card h3 {
+    font-size: clamp(42px, 5vw, 70px);
+    font-weight: normal;
+    letter-spacing: -3px;
+    line-height: .9;
+}
+
+.section-card p {
+    max-width: 400px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.open-label {
+    margin-top: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   ARTICLE PAGE
+   ========================================================= */
+
+.article-page {
+    padding-bottom: 120px;
+}
+
+.article-nav {
+    padding: 25px 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #171717;
+}
+
+.article-nav .logo {
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.article-hero {
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.article-header {
+    max-width: 1050px;
+    margin: 75px auto 60px;
+    padding: 0 30px;
+}
+
+.article-header .eyebrow {
+    margin-bottom: 20px;
+}
+
+.article-header h1 {
+    max-width: 1000px;
+
+    font-size: clamp(50px, 8vw, 105px);
+    line-height: .88;
+    letter-spacing: -5px;
+    font-weight: normal;
+}
+
+.article-deck {
+    max-width: 720px;
+    margin-top: 30px;
+
+    font-size: 21px;
+    line-height: 1.45;
+}
+
+.article-meta {
+    margin-top: 25px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.article-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.article-body p {
+    margin-bottom: 28px;
+
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.article-body .lead {
+    font-size: 25px;
+    line-height: 1.45;
+}
+
+.pullquote {
+    margin: 65px -130px;
+    padding: 35px 0;
+
+    border-top: 1px solid #171717;
+    border-bottom: 1px solid #171717;
+
+    font-size: 38px;
+    line-height: 1.05;
+    font-style: italic;
+}
+
+.article-image {
+    width: 100%;
+    margin: 55px 0;
+
+    display: block;
+}
+
+.caption {
+    margin-top: -45px;
+    margin-bottom: 55px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.article-footer {
+    max-width: 680px;
+    margin: 90px auto 0;
+    padding: 25px;
+
+    border-top: 1px solid #171717;
+}
+
+/* =========================================================
+   SPECIAL ARTICLE ELEMENTS
+   ========================================================= */
+
+.fact-box {
+    margin: 50px 0;
+    padding: 30px;
+
+    background: #171717;
+    color: #f2efe9;
+}
+
+.fact-box .eyebrow {
+    margin-bottom: 20px;
+}
+
+.fact-box h4 {
+    font-size: 34px;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.fact-box p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.tip-box {
+    margin: 50px 0;
+    padding: 35px;
+
+    border: 1px solid #171717;
+}
+
+.tip-box h4 {
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.tip-box p {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* =========================================================
+   ARCHIVE
+   ========================================================= */
+
+.archive {
+    padding: 100px 8vw;
+}
+
+.archive h2 {
+    font-size: clamp(55px, 8vw, 110px);
+    font-weight: normal;
+    letter-spacing: -5px;
+}
+
+.archive-intro {
+    max-width: 550px;
+    margin: 30px 0 80px;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.archive-item {
+    padding: 25px 0;
+    border-top: 1px solid #171717;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.archive-item:last-child {
+    border-bottom: 1px solid #171717;
+}
+
+.archive-item h3 {
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.archive-item span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    padding: 50px 6vw;
+
+    border-top: 1px solid #171717;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
 
     .cover-top {
-        position: absolute;
-        top: 30px;
-        left: 40px;
-        right: 40px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
-    .date {
-        opacity: 0.9;
+        left: 20px;
+        right: 20px;
     }
 
     .edition {
-        opacity: 0.9;
+        display: none;
     }
 
     .masthead {
-        position: absolute;
-        top: 55px;
-        left: 50%;
-        transform: translateX(-50%);
-
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(70px, 12vw, 170px);
-        font-weight: normal;
-        letter-spacing: -7px;
-        line-height: 0.8;
-
-        white-space: nowrap;
+        top: 70px;
+        font-size: 65px;
+        letter-spacing: -4px;
     }
 
     .cover-content {
-        position: absolute;
-        left: 50px;
-        bottom: 50px;
-        right: 50px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 40px;
+        left: 20px;
+        right: 20px;
+        bottom: 45px;
     }
 
-    .main-headline {
-        max-width: 650px;
+    .cover-main h1 {
+        font-size: 47px;
     }
 
-    .main-headline .category {
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-    }
-
-    .main-headline h1 {
-        font-size: clamp(42px, 6vw, 82px);
-        line-height: 0.94;
-        font-weight: normal;
-        letter-spacing: -2px;
-    }
-
-    .main-headline p {
-        margin-top: 18px;
-        font-size: 17px;
-        line-height: 1.4;
-        max-width: 500px;
-    }
-
-    .cover-headlines {
-        width: 290px;
-        font-family: Arial, sans-serif;
-    }
-
-    .cover-story {
-        border-top: 1px solid rgba(255,255,255,0.7);
-        padding: 14px 0;
-        cursor: pointer;
-        transition: opacity 0.2s;
-    }
-
-    .cover-story:hover {
-        opacity: 0.65;
-    }
-
-    .cover-story:last-child {
-        border-bottom: 1px solid rgba(255,255,255,0.7);
-    }
-
-    .cover-story span {
-        display: block;
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-    }
-
-    .cover-story strong {
-        font-family: Georgia, serif;
-        font-size: 19px;
-        font-weight: normal;
-        line-height: 1.1;
-    }
-
-    .enter {
-        position: absolute;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-
-        font-family: Arial, sans-serif;
-        font-size: 9px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        opacity: 0.8;
-    }
-
-
-    /* MAGAZINE */
-
-    .magazine {
-        background: #eeeae3;
-        padding: 100px 6vw;
-    }
-
-    .intro {
-        max-width: 850px;
-        margin: 0 auto 100px;
-        text-align: center;
-    }
-
-    .intro .small-title {
-        font-family: Arial, sans-serif;
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 25px;
-    }
-
-    .intro h2 {
-        font-size: clamp(36px, 5vw, 65px);
-        font-weight: normal;
-        line-height: 1;
-        letter-spacing: -1.5px;
-    }
-
-    .intro p {
-        margin: 30px auto 0;
-        max-width: 600px;
-        font-size: 17px;
-        line-height: 1.6;
-    }
-
-    /* SECTIONS */
-
-    .sections {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-        background: #171717;
-        border: 1px solid #171717;
-    }
-
-    .section {
-        background: #eeeae3;
-        min-height: 360px;
-        padding: 35px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-        transition: background 0.25s;
-    }
-
-    .section:hover {
-        background: #e2ddd5;
-    }
-
-    .section-number {
-        font-family: Arial, sans-serif;
-        font-size: 10px;
-        letter-spacing: 2px;
-    }
-
-    .section h3 {
-        font-size: clamp(38px, 5vw, 65px);
-        font-weight: normal;
-        letter-spacing: -2px;
-    }
-
-    .section p {
-        max-width: 380px;
+    .cover-main p {
         font-size: 15px;
-        line-height: 1.5;
     }
 
-    .section-link {
-        margin-top: 20px;
-        font-family: Arial, sans-serif;
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+    .cover-stories {
+        display: none;
     }
 
-    /* FOOTER */
-
-    footer {
-        padding: 60px 6vw;
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid #171717;
-        font-family: Arial, sans-serif;
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+    .issue {
+        padding: 70px 20px 80px;
     }
 
-
-    /* MOBILE */
-
-    @media (max-width: 700px) {
-
-        .cover-top {
-            left: 20px;
-            right: 20px;
-        }
-
-        .masthead {
-            top: 75px;
-            font-size: 65px;
-            letter-spacing: -4px;
-        }
-
-        .cover-content {
-            left: 20px;
-            right: 20px;
-            bottom: 45px;
-            display: block;
-        }
-
-        .main-headline h1 {
-            font-size: 48px;
-        }
-
-        .main-headline p {
-            font-size: 15px;
-        }
-
-        .cover-headlines {
-            display: none;
-        }
-
-        .magazine {
-            padding: 70px 20px;
-        }
-
-        .intro {
-            margin-bottom: 60px;
-        }
-
-        .sections {
-            grid-template-columns: 1fr;
-        }
-
-        .section {
-            min-height: 300px;
-        }
-
-        footer {
-            padding: 40px 20px;
-        }
+    .issue-header {
+        margin-bottom: 60px;
     }
+
+    .section-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-card {
+        min-height: 310px;
+    }
+
+    .menu-panel {
+        padding: 70px 25px;
+    }
+
+    .menu-panel h2 {
+        font-size: 60px;
+    }
+
+    .menu-links {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-link {
+        font-size: 21px;
+    }
+
+    .article-nav {
+        padding: 20px;
+    }
+
+    .article-hero {
+        height: 55vh;
+        min-height: 350px;
+    }
+
+    .article-header {
+        margin: 55px auto 45px;
+        padding: 0 20px;
+    }
+
+    .article-header h1 {
+        font-size: 52px;
+        letter-spacing: -3px;
+    }
+
+    .article-deck {
+        font-size: 18px;
+    }
+
+    .article-body {
+        padding: 0 22px;
+    }
+
+    .article-body p {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .article-body .lead {
+        font-size: 21px;
+    }
+
+    .pullquote {
+        margin: 50px 0;
+        font-size: 30px;
+    }
+
+    .site-footer {
+        padding: 40px 20px;
+    }
+}
+
 </style>
 </head>
 
 
 <body>
 
-<!-- COVER -->
+
+<!-- ======================================================
+     MENU
+     ====================================================== -->
+
+<button class="menu" onclick="toggleMenu()">MENU</button>
+
+<div class="menu-panel" id="menuPanel">
+
+    <div class="eyebrow">THE DAILY — Navigation</div>
+
+    <h2>Inside<br>today.</h2>
+
+    <div class="menu-links">
+
+        <div class="menu-link" onclick="showPage('home')">
+            Cover
+        </div>
+
+        <div class="menu-link" onclick="showArticle('world')">
+            The World
+        </div>
+
+        <div class="menu-link" onclick="showArticle('unexpected')">
+            The Unexpected
+        </div>
+
+        <div class="menu-link" onclick="showArticle('look')">
+            The Look
+        </div>
+
+        <div class="menu-link" onclick="showArticle('culture')">
+            The Culture
+        </div>
+
+        <div class="menu-link" onclick="showArticle('woman')">
+            The Woman
+        </div>
+
+        <div class="menu-link" onclick="showArticle('goodlife')">
+            The Good Life
+        </div>
+
+        <div class="menu-link" onclick="showArticle('mind')">
+            The Mind
+        </div>
+
+        <div class="menu-link" onclick="showArticle('tip')">
+            The Daily Tip
+        </div>
+
+        <div class="menu-link" onclick="showArticle('surprise')">
+            The Notebook
+        </div>
+
+        <div class="menu-link" onclick="showPage('archive')">
+            Archive
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     HOME / COVER
+     ====================================================== -->
+
+<div id="home" class="page active">
 
 <section class="cover">
 
     <div class="cover-top">
-        <div class="date">September 15, 2026</div>
-        <div class="edition">No. 01 — The Daily</div>
+        <div>September 15, 2026</div>
+        <div>Edition No. 001</div>
     </div>
 
     <div class="masthead">
@@ -339,201 +802,1102 @@
 
     <div class="cover-content">
 
-        <div class="main-headline">
-            <div class="category">The World</div>
+        <div class="cover-main">
+
+            <div class="eyebrow">
+                The World
+            </div>
 
             <h1>
-                The world is changing.<br>
-                Pay attention.
+                A little more
+                worldly, every morning.
             </h1>
 
             <p>
-                The stories, ideas and discoveries worth knowing today.
+                Eight things worth knowing, noticing or
+                thinking about today.
             </p>
+
         </div>
 
 
-        <div class="cover-headlines">
+        <div class="cover-stories">
 
-            <div class="cover-story">
-                <span>The Culture</span>
-                <strong>Why certain cities never really go out of style.</strong>
+            <div class="cover-story"
+                 onclick="showArticle('culture')">
+
+                <div class="eyebrow">
+                    The Culture
+                </div>
+
+                <strong>
+                    Why beautiful cities have a memory.
+                </strong>
+
             </div>
 
-            <div class="cover-story">
-                <span>The Woman</span>
-                <strong>The woman you should know this week.</strong>
+
+            <div class="cover-story"
+                 onclick="showArticle('woman')">
+
+                <div class="eyebrow">
+                    The Woman
+                </div>
+
+                <strong>
+                    The woman who changed the way we see fashion.
+                </strong>
+
             </div>
 
-            <div class="cover-story">
-                <span>The Look</span>
-                <strong>What everyone is wearing — and why.</strong>
+
+            <div class="cover-story"
+                 onclick="showArticle('unexpected')">
+
+                <div class="eyebrow">
+                    The Unexpected
+                </div>
+
+                <strong>
+                    The mysterious intelligence of birds.
+                </strong>
+
             </div>
 
-            <div class="cover-story">
-                <span>The Unexpected</span>
-                <strong>A strange little fact you'll remember.</strong>
+
+            <div class="cover-story"
+                 onclick="showArticle('mind')">
+
+                <div class="eyebrow">
+                    The Mind
+                </div>
+
+                <strong>
+                    Why leaving home changes who you are.
+                </strong>
+
             </div>
 
         </div>
 
     </div>
 
+
     <div class="enter">
-        Scroll to enter the issue ↓
+        ↓ Enter the issue
     </div>
 
 </section>
 
 
-<!-- MAGAZINE -->
+<!-- ISSUE INTRO -->
 
-<main class="magazine">
+<section class="issue">
 
-    <section class="intro">
+    <div class="issue-header">
 
-        <div class="small-title">
-            The idea
+        <div class="eyebrow">
+            The Daily — Edition 001
         </div>
 
         <h2>
-            A daily dose of the world,
-            carefully chosen.
+            Read the world.<br>
+            Notice more.
         </h2>
 
         <p>
-            THE DAILY is a small ritual for curious women.
-            Ten minutes to understand something, discover something,
-            notice something beautiful — and slowly build a world of
-            your own.
+            THE DAILY is a ten-minute morning ritual:
+            a carefully edited selection of ideas, people,
+            places, images and discoveries that make the
+            world a little larger.
         </p>
 
-    </section>
+    </div>
 
 
-    <section class="sections">
+    <div class="section-grid">
 
-        <article class="section">
-            <div class="section-number">01</div>
+
+        <!-- WORLD -->
+
+        <article class="section-card"
+                 onclick="showArticle('world')">
+
+            <div class="number">01</div>
 
             <div>
-                <h3>THE WORLD</h3>
+                <h3>THE<br>WORLD</h3>
+
                 <p>
-                    One important story from the world,
-                    explained clearly enough to understand
-                    and deeply enough to remember.
+                    One important story, explained without
+                    the noise.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Read today's story →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">02</div>
+        <!-- UNEXPECTED -->
+
+        <article class="section-card"
+                 onclick="showArticle('unexpected')">
+
+            <div class="number">02</div>
 
             <div>
-                <h3>THE UNEXPECTED</h3>
+                <h3>THE<br>UNEXPECTED</h3>
+
                 <p>
-                    Science, history, nature, strange facts
-                    and ideas you didn't know you wanted to know.
+                    Something strange, beautiful or surprising
+                    you didn't know yesterday.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Discover →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">03</div>
+        <!-- LOOK -->
+
+        <article class="section-card"
+                 onclick="showArticle('look')">
+
+            <div class="number">03</div>
 
             <div>
-                <h3>THE LOOK</h3>
+                <h3>THE<br>LOOK</h3>
+
                 <p>
-                    Fashion, image and the visual language
-                    of the people and places shaping culture.
+                    Fashion as image, language and culture.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    See today's look →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">04</div>
+        <!-- CULTURE -->
+
+        <article class="section-card"
+                 onclick="showArticle('culture')">
+
+            <div class="number">04</div>
 
             <div>
-                <h3>THE CULTURE</h3>
+                <h3>THE<br>CULTURE</h3>
+
                 <p>
-                    Books, cinema, art, architecture, history
-                    and the things that make life richer.
+                    Art, books, cinema, architecture and
+                    the ideas that stay with you.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Enter culture →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">05</div>
+        <!-- WOMAN -->
+
+        <article class="section-card"
+                 onclick="showArticle('woman')">
+
+            <div class="number">05</div>
 
             <div>
-                <h3>THE WOMAN</h3>
+                <h3>THE<br>WOMAN</h3>
+
                 <p>
-                    One remarkable woman worth knowing —
-                    her story, her work and what she changed.
+                    One remarkable woman worth knowing.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Meet her →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">06</div>
+        <!-- GOOD LIFE -->
+
+        <article class="section-card"
+                 onclick="showArticle('goodlife')">
+
+            <div class="number">06</div>
 
             <div>
-                <h3>THE GOOD LIFE</h3>
+                <h3>THE<br>GOOD LIFE</h3>
+
                 <p>
-                    Places, food, beauty, travel, manners,
-                    objects and the art of living well.
+                    Places, food, beauty, manners and the
+                    quiet art of living well.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Open →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">07</div>
+        <!-- MIND -->
+
+        <article class="section-card"
+                 onclick="showArticle('mind')">
+
+            <div class="number">07</div>
 
             <div>
-                <h3>THE MIND</h3>
+                <h3>THE<br>MIND</h3>
+
                 <p>
-                    Psychology, philosophy and small insights
-                    that change the way you understand yourself.
+                    Psychology, philosophy and the invisible
+                    forces behind how we live.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Think about it →
+                </div>
             </div>
+
         </article>
 
 
-        <article class="section">
-            <div class="section-number">08</div>
+        <!-- DAILY TIP -->
+
+        <article class="section-card"
+                 onclick="showArticle('tip')">
+
+            <div class="number">08</div>
 
             <div>
-                <h3>THE DAILY TIP</h3>
+                <h3>THE<br>DAILY TIP</h3>
+
                 <p>
-                    One useful thing about nutrition, beauty,
-                    health or the body that you probably didn't know.
+                    One small thing worth knowing about your
+                    body, beauty or wellbeing.
                 </p>
-                <div class="section-link">Open section →</div>
+
+                <div class="open-label">
+                    Today's tip →
+                </div>
             </div>
+
         </article>
 
-    </section>
 
-</main>
+        <!-- NOTEBOOK -->
+
+        <article class="section-card"
+                 onclick="showArticle('surprise')">
+
+            <div class="number">09</div>
+
+            <div>
+                <h3>THE<br>NOTEBOOK</h3>
+
+                <p>
+                    A little room for whatever deserves to
+                    be here today.
+                </p>
+
+                <div class="open-label">
+                    Open today's note →
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
 
 
-<footer>
+<footer class="site-footer">
+
     <div>THE DAILY</div>
-    <div>Read the world. Live beautifully.</div>
+
+    <div>
+        Curiosity is a lifestyle.
+    </div>
+
 </footer>
+
+</div>
+
+
+<!-- ======================================================
+     ARTICLE TEMPLATE
+     ====================================================== -->
+
+<div id="article" class="page article-page">
+
+    <div class="article-nav">
+
+        <button class="back-button"
+                onclick="showPage('home')">
+            ← Back to issue
+        </button>
+
+        <div class="logo">
+            THE DAILY
+        </div>
+
+        <div class="eyebrow">
+            001 / 2026
+        </div>
+
+    </div>
+
+
+    <div id="articleContent"></div>
+
+
+    <div class="article-footer">
+
+        <button class="back-button"
+                onclick="showPage('home')">
+            Return to today's issue →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     ARCHIVE
+     ====================================================== -->
+
+<div id="archive" class="page archive">
+
+    <div class="eyebrow">
+        THE DAILY — Archive
+    </div>
+
+    <h2>
+        Previous<br>editions.
+    </h2>
+
+    <p class="archive-intro">
+        Tomorrow, this library will begin to grow.
+        Every morning's edition will remain here,
+        waiting to be opened again.
+    </p>
+
+
+    <div class="archive-item"
+         onclick="showPage('home')">
+
+        <h3>September 15, 2026</h3>
+
+        <span>Edition 001 →</span>
+
+    </div>
+
+
+    <div class="archive-item">
+
+        <h3>September 14, 2026</h3>
+
+        <span>Coming soon</span>
+
+    </div>
+
+
+    <div class="archive-item">
+
+        <h3>September 13, 2026</h3>
+
+        <span>Coming soon</span>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ARTICLE CONTENT
+   ========================================================= */
+
+const articles = {
+
+
+world: {
+
+    category: "THE WORLD",
+
+    title: "The world is getting smaller. The differences are not.",
+
+    deck:
+    "Globalisation has made distance easier to cross. It has not made cultures interchangeable.",
+
+    image:
+    "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "5 min read · The World",
+
+    body: `
+
+        <p class="lead">
+        We can now wake up in Sydney, call someone in Paris,
+        order something from Seoul and spend the evening
+        watching a film made in Mumbai. The modern world has
+        never been easier to access.
+        </p>
+
+        <p>
+        But accessibility is not the same thing as understanding.
+        The more connected the world becomes, the more valuable
+        cultural fluency becomes: knowing why people behave
+        differently, why certain places feel different, and why
+        a gesture that seems perfectly natural in one country
+        can feel strange in another.
+        </p>
+
+        <p>
+        This is one of the quiet skills of a genuinely
+        cosmopolitan person. Not knowing everything about
+        everywhere, but remaining curious enough to notice
+        differences instead of immediately judging them.
+        </p>
+
+        <div class="pullquote">
+            “The world becomes larger when you stop assuming
+            that your way of doing things is universal.”
+        </div>
+
+        <p>
+        Travelling therefore teaches something that cannot be
+        learned from an airport lounge or a list of destinations.
+        It teaches observation. How long people stay at the
+        table. How they greet one another. What they consider
+        beautiful. How they dress for dinner. What they talk
+        about when nobody is trying to impress anyone.
+        </p>
+
+        <p>
+        Being worldly is ultimately less about having been
+        everywhere than about knowing how to be somewhere.
+        </p>
+
+    `
+},
+
+
+unexpected: {
+
+    category: "THE UNEXPECTED",
+
+    title: "Birds may be much more intelligent than we give them credit for.",
+
+    deck:
+    "A reminder that intelligence does not always look like ours.",
+
+    image:
+    "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "3 min read · The Unexpected",
+
+    body: `
+
+        <p class="lead">
+        We tend to imagine intelligence as something expressed
+        through language, mathematics or technology. Birds offer
+        a rather inconvenient alternative.
+        </p>
+
+        <p>
+        Some bird species can solve problems, remember locations,
+        recognise individuals and use objects as tools. Certain
+        corvids — the family that includes crows and ravens —
+        are particularly remarkable problem solvers.
+        </p>
+
+        <div class="fact-box">
+
+            <div class="eyebrow">
+                A strange fact
+            </div>
+
+            <h4>
+                A crow can remember a human face.
+            </h4>
+
+            <p>
+                Research has shown that crows can distinguish
+                between individual human faces and remember
+                people associated with threatening experiences.
+            </p>
+
+        </div>
+
+        <p>
+        The fascinating part is not simply that birds are
+        “smart”. It is that their intelligence evolved for a
+        completely different world. A crow does not need to
+        understand algebra. It needs to remember where food
+        is hidden, navigate territory and understand social
+        relationships.
+        </p>
+
+        <p>
+        Intelligence, in other words, may be less like a ladder
+        and more like a landscape. Different species have evolved
+        different ways of being clever.
+        </p>
+
+    `
+},
+
+
+look: {
+
+    category: "THE LOOK",
+
+    title: "The return of dressing like you have somewhere to be.",
+
+    deck:
+    "After years of dressing for comfort first, fashion is rediscovering intention.",
+
+    image:
+    "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "4 min read · The Look",
+
+    body: `
+
+        <p class="lead">
+        There is a particular pleasure in seeing someone who
+        looks as though they made a decision before leaving
+        the house.
+        </p>
+
+        <p>
+        Not overdressed. Not uncomfortable. Simply considered.
+        A coat that fits properly. A shoe chosen for the outfit
+        rather than convenience. Jewellery that looks lived in.
+        A colour repeated deliberately.
+        </p>
+
+        <p>
+        Fashion has spent years becoming increasingly casual.
+        The interesting reaction is not necessarily a return
+        to formal dressing, but a return to intention.
+        </p>
+
+        <img class="article-image"
+        src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1800&q=85">
+
+        <div class="caption">
+            Style becomes interesting when it begins to communicate
+            something before you speak.
+        </div>
+
+        <p>
+        The most compelling wardrobes often have very little
+        to do with quantity. They have a vocabulary: a silhouette,
+        a few materials, a way of combining old and new, perhaps
+        one object that appears again and again.
+        </p>
+
+        <p>
+        The point is not to dress expensively. It is to dress
+        intentionally.
+        </p>
+
+    `
+},
+
+
+culture: {
+
+    category: "THE CULTURE",
+
+    title: "Why beautiful cities have a memory.",
+
+    deck:
+    "The atmosphere of a city is built from layers: architecture, habits, rituals and people who came before us.",
+
+    image:
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=2200&q=85",
+
+    meta:
+    "5 min read · The Culture",
+
+    body: `
+
+        <p class="lead">
+        Paris does not feel like Paris because of the Eiffel
+        Tower. Remove the landmark and the city would still
+        have an unmistakable personality.
+        </p>
+
+        <p>
+        It lives in the proportions of the streets, the height
+        of the buildings, the rhythm of cafés, the colour of
+        shutters, the way people occupy public space and the
+        fact that centuries of decisions remain visible around
+        you.
+        </p>
+
+        <p>
+        This is what makes historical cities feel almost like
+        people. They have memories.
+        </p>
+
+        <p>
+        Architecture is therefore not simply decoration.
+        It shapes behaviour. A narrow street encourages a
+        different relationship with public space than a
+        highway. A square with cafés invites people to remain.
+        A grand staircase makes entering a building feel like
+        an event.
+        </p>
+
+        <div class="pullquote">
+            A city becomes beautiful when its past is allowed
+            to remain visible in its present.
+        </div>
+
+        <p>
+        Perhaps this is why the most interesting cities rarely
+        feel perfectly new. They feel layered.
+        </p>
+
+    `
+},
+
+
+woman: {
+
+    category: "THE WOMAN",
+
+    title: "Diana Vreeland understood something most people forget about style.",
+
+    deck:
+    "Before Instagram, before personal branding, there was the art of creating a world people wanted to enter.",
+
+    image:
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1800&q=85",
+
+    meta:
+    "5 min read · The Woman",
+
+    body: `
+
+        <p class="lead">
+        Diana Vreeland was an editor, curator and one of the
+        great characters of twentieth-century fashion. Her
+        particular talent was not simply predicting what people
+        would wear.
+        </p>
+
+        <p>
+        She understood imagination.
+        </p>
+
+        <p>
+        As an editor, she could transform a fashion story into
+        an entire universe. A photograph was never merely a
+        photograph. It could suggest a country, an era, a mood,
+        a fantasy or an entire way of living.
+        </p>
+
+        <p>
+        That instinct remains surprisingly relevant today.
+        The strongest brands rarely sell only products. They
+        create worlds. The strongest magazines do the same.
+        </p>
+
+        <div class="fact-box">
+
+            <div class="eyebrow">
+                The idea
+            </div>
+
+            <h4>
+                Don't just show the object. Build the world around it.
+            </h4>
+
+            <p>
+                This is one of the fundamental principles of
+                editorial storytelling.
+            </p>
+
+        </div>
+
+        <p>
+        Vreeland's legacy is therefore bigger than fashion.
+        It is about the power of a strong point of view.
+        </p>
+
+    `
+},
+
+
+goodlife: {
+
+    category: "THE GOOD LIFE",
+
+    title: "The art of staying at the table.",
+
+    deck:
+    "Some of the most refined habits have nothing to do with money.",
+
+    image:
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "4 min read · The Good Life",
+
+    body: `
+
+        <p class="lead">
+        There is something increasingly luxurious about having
+        nowhere else to be.
+        </p>
+
+        <p>
+        A long lunch. A table that is not cleared immediately.
+        A conversation that wanders away from its original
+        subject. Nobody checking the time.
+        </p>
+
+        <p>
+        In many European cultures, meals have historically
+        functioned as social architecture. They create a space
+        where people can talk, observe one another and remain
+        together long enough for conversation to move beyond
+        small talk.
+        </p>
+
+        <p>
+        This is one reason entertaining well is less about
+        having a perfect house than about making people feel
+        that they are allowed to stay.
+        </p>
+
+        <div class="pullquote">
+            Hospitality is the art of making someone forget
+            that they are a guest.
+        </div>
+
+        <p>
+        A beautiful life is often made from these small forms
+        of generosity: time, attention, a well-set table, a
+        thoughtful question.
+        </p>
+
+    `
+},
+
+
+mind: {
+
+    category: "THE MIND",
+
+    title: "Why leaving home changes the way you see yourself.",
+
+    deck:
+    "Distance creates a strange psychological freedom: you become both more yourself and less certain of who that is.",
+
+    image:
+    "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2200&q=85",
+
+    meta:
+    "5 min read · The Mind",
+
+    body: `
+
+        <p class="lead">
+        When you leave the environment that made you,
+        something interesting happens: some parts of you become
+        louder, while others become quieter.
+        </p>
+
+        <p>
+        At home, identity is reinforced constantly. People know
+        your history. They remember who you were at seventeen.
+        They have expectations about how you behave.
+        </p>
+
+        <p>
+        In a new country, much of that disappears.
+        </p>
+
+        <p>
+        You have to introduce yourself again. You choose which
+        parts of your personality to emphasise. You discover
+        that certain habits were cultural rather than personal.
+        You also discover which values remain when nobody around
+        you expects them.
+        </p>
+
+        <div class="pullquote">
+            Sometimes distance does not make you lose yourself.
+            It shows you which parts were actually yours.
+        </div>
+
+        <p>
+        This is one reason living abroad can feel exhilarating
+        and lonely at the same time. Freedom and uncertainty
+        are often two sides of the same psychological experience.
+        </p>
+
+        <p>
+        The useful question is not “Who am I now?”
+        It is “Which parts of myself do I want to keep?”
+        </p>
+
+    `
+},
+
+
+tip: {
+
+    category: "THE DAILY TIP",
+
+    title: "Your body may absorb iron differently depending on what you eat with it.",
+
+    deck:
+    "One small nutrition detail that is surprisingly easy to use.",
+
+    image:
+    "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "1 min read · The Daily Tip",
+
+    body: `
+
+        <p class="lead">
+        Vitamin C can increase the absorption of non-heme iron,
+        the form of iron found mainly in plant foods.
+        </p>
+
+        <p>
+        So if you are eating an iron-rich plant food such as
+        lentils, beans or spinach, pairing it with a source of
+        vitamin C — for example citrus, kiwi, capsicum or
+        tomatoes — can help your body absorb more of that iron.
+        </p>
+
+        <div class="tip-box">
+
+            <div class="eyebrow">
+                Try this
+            </div>
+
+            <h4>
+                Lentils + tomatoes.
+            </h4>
+
+            <p>
+                A tiny change, but a useful principle:
+                sometimes what you eat <em>with</em> a food matters
+                almost as much as the food itself.
+            </p>
+
+        </div>
+
+        <p>
+        The reverse is worth knowing too: tea and coffee contain
+        compounds that can reduce non-heme iron absorption when
+        consumed around the same time as an iron-rich meal.
+        </p>
+
+        <p>
+        As always, nutrition depends on the individual and this
+        is general information rather than medical advice.
+        </p>
+
+    `
+},
+
+
+surprise: {
+
+    category: "THE NOTEBOOK",
+
+    title: "A small theory about beautiful things.",
+
+    deck:
+    "Perhaps we do not love certain objects because they are beautiful. Perhaps we learn what beauty is by loving them.",
+
+    image:
+    "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=2000&q=85",
+
+    meta:
+    "2 min read · The Notebook",
+
+    body: `
+
+        <p class="lead">
+        Taste is often described as if it were something people
+        are simply born with. It probably isn't that simple.
+        </p>
+
+        <p>
+        We learn what to notice.
+        </p>
+
+        <p>
+        We see a particular kind of chair often enough and
+        eventually recognise its proportions. We hear a certain
+        piece of music and begin to distinguish its structure.
+        We visit enough old buildings to notice why one staircase
+        feels more beautiful than another.
+        </p>
+
+        <p>
+        Taste is partly accumulated attention.
+        </p>
+
+        <div class="pullquote">
+            What you repeatedly choose to notice eventually
+            becomes part of your way of seeing.
+        </div>
+
+        <p>
+        Which is perhaps a good reason to surround yourself with
+        things that make you curious.
+        </p>
+
+    `
+}
+
+};
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function hideAllPages() {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+}
+
+
+function showPage(id) {
+
+    hideAllPages();
+
+    document.getElementById(id).classList.add("active");
+
+    closeMenu();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+}
+
+
+function showArticle(key) {
+
+    const article = articles[key];
+
+    if (!article) return;
+
+    hideAllPages();
+
+    const container = document.getElementById("articleContent");
+
+    container.innerHTML = `
+
+        <div
+            class="article-hero"
+            style="background-image:
+            linear-gradient(rgba(0,0,0,.04), rgba(0,0,0,.12)),
+            url('${article.image}')">
+        </div>
+
+        <header class="article-header">
+
+            <div class="eyebrow">
+                ${article.category}
+            </div>
+
+            <h1>
+                ${article.title}
+            </h1>
+
+            <p class="article-deck">
+                ${article.deck}
+            </p>
+
+            <div class="article-meta">
+                ${article.meta}
+            </div>
+
+        </header>
+
+        <article class="article-body">
+
+            ${article.body}
+
+        </article>
+    `;
+
+    document.getElementById("article").classList.add("active");
+
+    closeMenu();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+function toggleMenu() {
+
+    const panel = document.getElementById("menuPanel");
+
+    panel.classList.toggle("open");
+
+}
+
+
+function closeMenu() {
+
+    document
+        .getElementById("menuPanel")
+        .classList.remove("open");
+
+}
+
+</script>
 
 </body>
 </html>
