@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily</title>
 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f7f4ee;
+            color: #171717;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        header {
+            padding: 35px 5vw 25px;
+            border-bottom: 1px solid #cfcac0;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .logo {
+            font-family: Arial, sans-serif;
+            font-size: 42px;
+            letter-spacing: 7px;
+            font-weight: 600;
+        }
+
+        .date {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .intro {
+            padding: 65px 5vw 45px;
+        }
+
+        .intro p {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .intro h1 {
+            font-size: clamp(38px, 6vw, 76px);
+            font-weight: normal;
+            line-height: 0.95;
+            max-width: 850px;
+        }
+
+        .intro em {
+            font-style: italic;
+        }
+
+        .magazine {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            padding-bottom: 70px;
+        }
+
+        .card {
+            min-height: 310px;
+            padding: 30px;
+            border: 1px solid #cfcac0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f7f4ee;
+        }
+
+        .card:hover {
+            background: #171717;
+            color: #f7f4ee;
+            transform: translateY(-5px);
+        }
+
+        .number {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .category {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .card h2 {
+            font-size: clamp(30px, 4vw, 52px);
+            font-weight: normal;
+            margin: 20px 0;
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 450px;
+        }
+
+        .full {
+            grid-column: span 2;
+            min-height: 240px;
+        }
+
+        footer {
+            border-top: 1px solid #cfcac0;
+            padding: 25px 5vw;
+            display: flex;
+            justify-content: space-between;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                align-items: start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            .magazine {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: span 1;
+            }
+
+            .card {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">THE DAILY</div>
+    <div class="date">Monday · September 14 · 2026</div>
+</header>
+
+<section class="intro">
+    <p>Your morning edit</p>
+
+    <h1>
+        Good morning.<br>
+        <em>Here are seven things worth knowing today.</em>
+    </h1>
+</section>
+
+<main class="magazine">
+
+    <article class="card">
+        <div class="number">01</div>
+
+        <div>
+            <div class="category">The World</div>
+            <h2>What matters today.</h2>
+            <div class="description">
+                One important story from the world,
+                explained without the noise.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card">
+        <div class="number">02</div>
+
+        <div>
+            <div class="category">The Unexpected</div>
+            <h2>Did you know?</h2>
+            <div class="description">
+                Something wonderfully random
+                that might completely change the way you see the world.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card">
+        <div class="number">03</div>
+
+        <div>
+            <div class="category">The Look</div>
+            <h2>Fashion, decoded.</h2>
+            <div class="description">
+                A trend, a photograph, a designer
+                or a cultural phenomenon worth understanding.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card">
+        <div class="number">04</div>
+
+        <div>
+            <div class="category">The Culture</div>
+            <h2>Something to discover.</h2>
+            <div class="description">
+                A film, a book, an artist, an exhibition
+                or an idea that deserves your attention.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card">
+        <div class="number">05</div>
+
+        <div>
+            <div class="category">The Woman</div>
+            <h2>Know her.</h2>
+            <div class="description">
+                One fascinating woman and the reason
+                you should know her name.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card">
+        <div class="number">06</div>
+
+        <div>
+            <div class="category">The Good Life</div>
+            <h2>The art of living.</h2>
+            <div class="description">
+                Food, travel, beauty, etiquette,
+                places and the little things that make life richer.
+            </div>
+        </div>
+    </article>
+
+
+    <article class="card full">
+        <div class="number">07</div>
+
+        <div>
+            <div class="category">The Thought</div>
+            <h2>A question worth carrying with you.</h2>
+            <div class="description">
+                Not everything needs an answer.
+                Some things simply deserve to be thought about.
+            </div>
+        </div>
+    </article>
+
+</main>
+
+<footer>
+    <span>The Daily</span>
+    <span>Curiosity is a lifestyle.</span>
+</footer>
+
+</body>
+</html>
